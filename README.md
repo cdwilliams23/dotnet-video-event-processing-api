@@ -47,6 +47,4 @@ Each meaningful phase gets a focused issue, a `feature/` branch, validation, a r
 
 ## Current status
 
-Phase 1 is in progress on `feature/repository-foundation` (issue #1). The GitHub repository and branch exist. The working environment does not currently have the .NET SDK, so project templates have **not** been generated and no build has been validated. No application features, database connectivity, or tests have been implemented yet.
-
-Once a .NET 8 SDK is available, the next step is to generate the three projects using `dotnet new`, add the solution references, run `dotnet build VideoEventProcessor.sln`, review the diff, and make the focused Phase 1 commit.
+Phase 1 is in progress on feature/repository-foundation (issue #1). The .NET 8 SDK is installed, the API, Domain, and Infrastructure projects have been scaffolded with their project references, and dotnet build VideoEventProcessor.sln succeeds with 0 warnings and 0 errors. No camera-event features, database connectivity, or tests have been implemented yet.
