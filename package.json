@@ -1,0 +1,7 @@
+{
+  "name": "dotnet-video-event-processing-api",
+  "private": true,
+  "devDependencies": {
+    "supabase": "^2.119.0"
+  }
+}
