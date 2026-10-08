@@ -20,6 +20,9 @@ CREATE TABLE public.camera_events (
     UNIQUE (camera_id, source_event_id)
 );
 
+CREATE INDEX camera_events_site_occurred_idx
+ON public.camera_events (site_id, occurred_at_utc);
+
 REVOKE ALL ON TABLE public.sites, public.cameras, public.camera_events
 FROM anon, authenticated;
 
