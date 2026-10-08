@@ -1,13 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using VideoEventProcessor.Api;
+using VideoEventProcessor.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var connectionString = builder.Configuration.GetConnectionString("VideoEvents")
+    ?? throw new InvalidOperationException("Set ConnectionStrings__VideoEvents to a local PostgreSQL connection string.");
+builder.Services.AddDbContext<VideoEventDbContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddScoped<EventStore>();
+builder.Services.AddHealthChecks().AddCheck<DatabaseHealthCheck>("postgresql");
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -15,5 +22,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapHealthChecks("/health");
 
 app.Run();
